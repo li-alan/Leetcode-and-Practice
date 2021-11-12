@@ -1,0 +1,20 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        int oldColor=image[sr][sc];
+        if(oldColor==newColor){
+            return image;
+        }
+        callBFS(image,sr,sc,oldColor,newColor);
+        return image;
+    }
+    public void callBFS(int[][] image, int x, int y,int oldColor, int newColor){
+        if(x<0||x>=image.length||y<0||y>=image[x].length||image[x][y]!=oldColor){
+            return;
+        }
+        image[x][y]=newColor;
+        callBFS(image,x+1,y,oldColor,newColor); //up
+        callBFS(image,x-1,y,oldColor,newColor); //down   
+        callBFS(image,x,y-1,oldColor,newColor); //left 
+        callBFS(image,x,y+1,oldColor,newColor); //right
+    }
+}
