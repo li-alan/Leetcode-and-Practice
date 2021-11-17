@@ -1,0 +1,16 @@
+//time complexity: O(N) where n is size of array
+//space complexity: O(1)
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int currMax=0;
+        int prev=prices[0];
+        for(int i=1;i<prices.length;i++){
+            currMax=Math.max(prices[i]-prev,currMax);
+            if(prices[i]<prev){
+                prev=prices[i];
+            }
+        }
+        return currMax;
+    }
+}
