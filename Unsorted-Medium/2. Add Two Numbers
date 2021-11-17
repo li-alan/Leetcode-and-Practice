@@ -1,0 +1,41 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead=new ListNode(0);
+        int carryOver=0;
+        ListNode p=l1,q=l2,cur=dummyHead;
+        while(p!=null||q!=null){
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;         
+            int value=x+y+carryOver;
+            if(value>=10){
+                carryOver=1;
+                cur.next=new ListNode(value%10);
+            }else{
+                cur.next=new ListNode(value);
+                carryOver=0;
+            }
+            if (p != null) p = p.next;
+            if (q != null) q = q.next;    
+            cur=cur.next;
+            
+        }
+        if(carryOver!=0){
+            cur.next = new ListNode(carryOver);
+        }
+        return dummyHead.next;
+    }
+}
+
+
+//The time complexity is O(max(m,n)) with m and n representing the length  of the two linked lists
+//The space  complexity is also O(max(m,n)) since we will have to iterate though to the end of the linkedlists
