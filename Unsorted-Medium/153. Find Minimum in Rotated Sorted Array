@@ -1,0 +1,32 @@
+class Solution {
+    public int findMin(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        if (nums.length == 1) {
+          return nums[0];
+        }
+        if (nums[right] > nums[left]) {
+          return nums[left];
+        }
+        while(right>=left){
+            //find middle element
+            int mid = left + (right - left) / 2;
+            //if middle is greater than the right, then right element is least
+            if (nums[mid] > nums[mid + 1]) {
+                return nums[mid + 1];
+            }
+            //if middle is less than the middle, then middle is least
+            if (nums[mid - 1] > nums[mid]) {
+                return nums[mid];
+            }   
+            
+            // 4,5,'6',7,2,3
+            //middle is greater than left, check right; set left to middle
+            if (nums[mid] > nums[left]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+}
