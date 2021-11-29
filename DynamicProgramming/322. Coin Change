@@ -1,0 +1,28 @@
+class Solution {    
+    Map<Integer,Integer> memo = new HashMap<Integer,Integer>();
+    public int coinChange(int[] coins, int amount) {
+        if(amount==0){
+            return 0;
+        }
+        if(amount<0){
+            return -1;
+        }
+        if(memo.containsKey(amount)){
+            return memo.get(amount);
+        }
+        int shortestCombination =-1;
+        for(int coin: coins){
+            int remainder=amount-coin;
+            int remainderResult=coinChange(coins,remainder);
+            if(remainderResult>=0){
+                int x = remainderResult+1;
+                if(shortestCombination==-1||x<shortestCombination){
+                    shortestCombination=x;
+                }
+
+            }
+        }
+        memo.put(amount,shortestCombination);
+        return shortestCombination;
+    }
+}
