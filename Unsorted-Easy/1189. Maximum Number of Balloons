@@ -1,0 +1,20 @@
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int[] counts = new int[5];
+        for(char c : text.toCharArray()){
+            switch(c){
+                case 'b': counts[0]++;
+                            break;
+                case 'a': counts[1]++;
+                            break;
+                case 'l': counts[2]++;
+                            break;
+                case 'o': counts[3]++;
+                            break;
+                case 'n': counts[4]++;
+                            break;     
+            }
+        }
+        return IntStream.of(counts[0],counts[1],counts[2]/2,counts[3]/2,counts[4]).min().getAsInt();
+    }
+}
